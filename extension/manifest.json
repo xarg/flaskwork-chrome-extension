@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Flaskwork",
+  "version": "0.1.0",
+  "description": "A simple tool for integrating w/Flask & SQLAlchemy apps",
+  "permissions": ["tabs", "http://*/__flaskwork/*", "https://*/__flaskwork/*"],
+  "devtools_page": "devtools.html",
+  "page_action": {
+    "default_icon": "images/ic_network_check_black_24dp_1x.png",
+    "default_title": "Hello, world"
+  }
+}
