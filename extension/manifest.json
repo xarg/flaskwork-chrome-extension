@@ -6,7 +6,6 @@
   "permissions": ["tabs", "http://*/__flaskwork/*", "https://*/__flaskwork/*"],
   "devtools_page": "devtools.html",
   "page_action": {
-    "default_icon": "images/ic_network_check_black_24dp_1x.png",
     "default_title": "Flaskwork"
   }
 }
