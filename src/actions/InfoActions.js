@@ -3,20 +3,27 @@ import {InfoConstants} from '../constants';
 import $ from 'jquery';
 
 
-export default {
-  get(uuid) {
-    chrome.devtools.inspectedWindow.eval('location', location => {
-      var url = `${location.protocol}//${location.hostname}/__flaskwork/${uuid}`;
+const urlPattern = /^(.*?:)\/\/([^\/]*)/;
 
-      return $.ajax({
-        url: url,
-        type: 'GET'
-      }).success(data => {
-        dispatcher.dispatch({
-          type: InfoConstants.ADD,
-          info: data,
-          uuid: uuid
-        });
+
+export default {
+  get(requestUrl, uuid) {
+    var match = urlPattern.exec(requestUrl);
+
+    if (!match) {
+      throw new Error("Could not find protocol and hostname in URL: " + requestUrl);
+    }
+
+    var url = `${match[1]}//${match[2]}/__flaskwork/${uuid}`;
+
+    return $.ajax({
+      url: url,
+      type: 'GET'
+    }).success(data => {
+      dispatcher.dispatch({
+        type: InfoConstants.ADD,
+        info: data,
+        uuid: uuid
       });
     });
   },
@@ -25,6 +32,12 @@ export default {
     dispatcher.dispatch({
       type: InfoConstants.SELECT,
       uuid: uuid
+    });
+  },
+
+  reset() {
+    dispatcher.dispatch({
+      type: InfoConstants.RESET
     });
   }
 };

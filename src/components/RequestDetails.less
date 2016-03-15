@@ -1,0 +1,125 @@
+.request-details {
+  background: #fff;
+  bottom: 0;
+  border-left: 1px solid #c2c2c2;
+  box-shadow: 0 0 12px fade(#000, 25%);
+  box-sizing: border-box;
+  position: absolute;
+  right: -75vw;
+  top: 0;
+  transform: translateX(0);
+  transition: 0.3s transform ease-in-out;
+  width: 75vw;
+
+  &.show {
+    transform: translateX(-75vw);
+  }
+
+  .request-details-inner {
+    bottom: 20px;
+    left: 20px;
+    overflow: hidden;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+
+  @tab-height: 25px;
+
+  .tabs {
+    left: 0;
+    height: @tab-height;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .tab {
+      cursor: pointer;
+      display: inline-block;
+      font-weight: bold;
+      height: @tab-height;
+      line-height: @tab-height;
+      text-align: center;
+      width: 20%;
+    }
+  }
+
+  .panels {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transition: 0.3s transform ease-in-out;
+    top: @tab-height;
+
+    .panel {
+      bottom: 0;
+      height: 100%;
+      left: 0;
+      overflow: auto;
+      position: absolute;
+      right: 0;
+      top: 10px;
+
+      &.request {
+        transform: translateX(0);
+      }
+
+      &.response {
+        transform: translateX(100%);
+      }
+
+      &.session {
+        transform: translateX(200%);
+      }
+
+      &.queries {
+        transform: translateX(300%);
+
+        ul.queries {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          li {
+            padding: 5px 0;
+
+            &+li {
+              border-top: 1px solid #e9e9e9;
+              margin: 5px 0;
+            }
+
+            .query-statement {
+              font-family: monospace;
+              font-size: 12px;
+              margin-bottom: 3px;
+            }
+          }
+        }
+      }
+
+      &.profiling {
+        transform: translateX(400%);
+
+        pre {
+          white-space: pre;
+        }
+      }
+    }
+  }
+
+  .tab-indicator {
+    background: @blue;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: @tab-height - 2;
+    transition: 0.3s transform ease-in-out;
+    width: 20%;
+  }
+
+  pre {
+    font-size: 12px;
+    // white-space: pre-wrap;
+  }
+}

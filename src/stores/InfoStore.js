@@ -37,7 +37,7 @@ const InfoStore = assign(new EventEmitter(), {
 
   dispatchToken: dispatcher.register(action => {
     switch (action.type) {
-      case (InfoConstants.ADD):
+      case InfoConstants.ADD:
         let oldInfo = infosById[action.uuid];
         if (oldInfo) {
           let index = infos.indexOf(oldInfo);
@@ -48,11 +48,19 @@ const InfoStore = assign(new EventEmitter(), {
         infosById[action.uuid] = action.info;
         action.info.uuid = action.uuid;
         infos.push(action.info);
+        infos = infos.slice();
         InfoStore.emitChange();
         break;
-      case (InfoConstants.SELECT):
+      case InfoConstants.SELECT:
         selectedInfo = infosById[action.uuid] || null;
         InfoStore.emitChange();
+        break;
+      case InfoConstants.RESET:
+        selectedInfo = null;
+        infos = [];
+        infosById = {};
+        InfoStore.emitChange();
+        break;
     }
 
     return true;
