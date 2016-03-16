@@ -11,6 +11,7 @@ export default class RequestDetails extends Component {
 
     this.state = {
       info: InfoStore.getSelected(),
+      show: InfoStore.getSelected() ? true : false,
       activeTab: 0
     };
   }
@@ -24,13 +25,15 @@ export default class RequestDetails extends Component {
   }
 
   shouldComponentUpdate(props, state) {
-    return state.info !== this.state.info || state.activeTab !== this.state.activeTab;
+    return state.info !== this.state.info ||
+      state.activeTab !== this.state.activeTab ||
+      state.show !== this.state.show;
   }
 
   render() {
     var queries = this.state.info ? this.state.info.queries : [];
     var classes = cx('request-details', {
-      show: this.state.info
+      show: this.state.show
     });
 
     var panelStyle = {
@@ -66,9 +69,9 @@ export default class RequestDetails extends Component {
             <div className="tab" onClick={this._go(3)}>
               Queries
             </div>
-            <div className="tab" onClick={this._go(4)}>
+            {/*<div className="tab" onClick={this._go(4)}>
               Profiling
-            </div>
+            </div>*/}
           </div>
           <div className="tab-indicator" style={indicatorStyle}></div>
           <div className="panels" style={panelStyle}>
@@ -116,11 +119,11 @@ export default class RequestDetails extends Component {
                 )}
               </div>
             </div>
-            <div className="panel profiling">
+            {/*<div className="panel profiling">
               <pre>
                 {profile}
               </pre>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
@@ -140,8 +143,18 @@ export default class RequestDetails extends Component {
   }
 
   _onChange = () => {
-    this.setState({
-      info: InfoStore.getSelected()
-    });
+    var info = InfoStore.getSelected();
+
+    if (!info) {
+      this.setState({
+        show: false
+      });
+    }
+    else {
+      this.setState({
+        info: info,
+        show: true
+      });
+    }
   }
 }

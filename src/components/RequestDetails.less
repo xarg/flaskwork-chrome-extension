@@ -4,15 +4,19 @@
   border-left: 1px solid #c2c2c2;
   box-shadow: 0 0 12px fade(#000, 25%);
   box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
   position: absolute;
-  right: -75vw;
+  right: 0;
   top: 0;
-  transform: translateX(0);
-  transition: 0.3s transform ease-in-out;
+  transform: translateX(30px);
+  transition: 0.3s all ease-in-out;
   width: 75vw;
 
   &.show {
-    transform: translateX(-75vw);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
   }
 
   .request-details-inner {
@@ -40,7 +44,7 @@
       height: @tab-height;
       line-height: @tab-height;
       text-align: center;
-      width: 20%;
+      width: 25%;
     }
   }
 
@@ -160,7 +164,7 @@
     position: absolute;
     top: @tab-height - 2;
     transition: 0.3s transform ease-in-out;
-    width: 20%;
+    width: 25%;
   }
 
   pre {

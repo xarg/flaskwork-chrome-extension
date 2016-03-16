@@ -41,7 +41,7 @@ function build() {
 }
 
 
-gulp.task('build:js', function() {
+gulp.task('build:js', ['set-development-env'], function() {
   return build()
     .pipe(source('flaskwork.js'))
     .pipe(gulp.dest('extension'))
@@ -81,9 +81,19 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('uglify', function() {
+gulp.task('set-production-env', function() {
+  process.env.NODE_ENV = 'production';
+});
+
+
+gulp.task('set-development-env', function() {
+  process.env.NODE_ENV = 'development';
+});
+
+
+gulp.task('build:production', ['set-production-env'], function() {
   return build()
-    .pipe(source('flaskwork.min.js'))
+    .pipe(source('flaskwork.js'))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest('extension'))
