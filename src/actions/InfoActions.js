@@ -7,15 +7,7 @@ const urlPattern = /^(.*?:)\/\/([^\/]*)/;
 
 
 export default {
-  get(requestUrl, uuid) {
-    var match = urlPattern.exec(requestUrl);
-
-    if (!match) {
-      throw new Error("Could not find protocol and hostname in URL: " + requestUrl);
-    }
-
-    var url = `${match[1]}//${match[2]}/__flaskwork/${uuid}`;
-
+  get(url, uuid) {
     return $.ajax({
       url: url,
       type: 'GET'

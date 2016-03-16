@@ -7,6 +7,9 @@ import RequestList from './RequestList';
 import RequestDetails from './RequestDetails';
 
 
+var urlPattern = /^(.*?:)\/\/([^\/]*)/;
+
+
 export default class FlaskworkApp extends Component {
   componentDidMount() {
     chrome.devtools.network.onRequestFinished.addListener(this._onRequest);
@@ -29,11 +32,30 @@ export default class FlaskworkApp extends Component {
   }
 
   _onRequest(request) {
+    var uuid;
+    var url;
+
     request.response.headers.forEach(header => {
       if (header.name === 'X-Flaskwork-UUID') {
-        InfoActions.get(request.request.url, header.value);
+        uuid = header.value;
+        // InfoActions.get(request.request.url, header.value);
+      }
+      if (header.name === 'X-Flaskwork-URL') {
+        url = header.value;
       }
     });
+
+    if (!url) {
+      let match = urlPattern.exec(request.request.url);
+
+      if (!match) {
+        throw new Error("Could not find protocol and hostname in URL: " + requestUrl);
+      }
+
+      url = `${match[1]}//${match[2]}/__flaskwork/${uuid}`;
+    }
+
+    InfoActions.get(url, uuid);
   }
 
   _onClick = (event) => {

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Flaskwork",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A simple tool for integrating w/Flask & SQLAlchemy apps",
   "permissions": ["tabs", "http://*/__flaskwork/*", "https://*/__flaskwork/*"],
   "devtools_page": "devtools.html",
