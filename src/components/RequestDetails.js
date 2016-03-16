@@ -44,6 +44,7 @@ export default class RequestDetails extends Component {
     var response = this.state.info ? this.state.info.response : {};
     var session = this.state.info ? this.state.info.session : {};
     var profile = this.state.info ? this.state.info.profile : null;
+    var queryTime = this.state.info ? this.state.info.database_time : 0;
 
     function prettify(obj) {
       return JSON.stringify(obj, null, 4);
@@ -97,17 +98,23 @@ export default class RequestDetails extends Component {
               </pre>
             </div>
             <div className="panel queries">
-              <ul className="queries">
+              <div className="total-queries">
+                <strong>Total Queries:</strong> {queries.length} ({ms(queryTime)})
+              </div>
+              <div className="queries-list">
+                <div className="queries-item queries-heading">
+                  <div className="query-statement"><span>Query</span></div>
+                  <div className="query-time"><span>Time</span></div>
+                </div>
                 {queries.map((i, n) =>
-                  <li key={n}>
-                    <div className="query-statement">{i.statement}</div>
+                  <div className="queries-item" key={n}>
+                    <div className="query-statement"><span>{i.statement}</span></div>
                     <div className="query-time">
-                      <strong>Query Time:</strong>&nbsp;
                       <span>{ms(i.query_time)}</span>
                     </div>
-                  </li>
+                  </div>
                 )}
-              </ul>
+              </div>
             </div>
             <div className="panel profiling">
               <pre>

@@ -16,8 +16,9 @@ export default class FlaskworkApp extends Component {
   render() {
     return (
       <div className="flaskwork" onClick={this._onClick}>
-        <h1>Flaskwork</h1>
-        <RequestList />
+        <div className="flaskwork-main">
+          <RequestList />
+        </div>
         <RequestDetails />
       </div>
     );
