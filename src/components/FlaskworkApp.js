@@ -55,7 +55,9 @@ export default class FlaskworkApp extends Component {
       url = `${match[1]}//${match[2]}/__flaskwork/${uuid}`;
     }
 
-    InfoActions.get(url, uuid);
+    if (uuid) {
+      InfoActions.get(url, uuid);
+    }
   }
 
   _onClick = (event) => {
