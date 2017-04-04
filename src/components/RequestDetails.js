@@ -111,7 +111,7 @@ export default class RequestDetails extends Component {
                 </div>
                 {queries.map((i, n) =>
                   <div className="queries-item" key={n}>
-                    <div className="query-statement"><span>{i.statement}</span></div>
+                    <div className="query-statement"><pre>{i.statement}</pre></div>
                     <div className="query-time">
                       <span>{ms(i.query_time)}</span>
                     </div>
