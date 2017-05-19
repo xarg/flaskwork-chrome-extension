@@ -44,7 +44,7 @@
       height: @tab-height;
       line-height: @tab-height;
       text-align: center;
-      width: 25%;
+      width: 16%;
     }
   }
 
@@ -65,20 +65,8 @@
       right: 0;
       top: 10px;
 
-      &.request {
-        transform: translateX(0);
-      }
-
-      &.response {
-        transform: translateX(100%);
-      }
-
-      &.session {
-        transform: translateX(200%);
-      }
-
       &.queries {
-        transform: translateX(300%);
+        transform: translateX(0);
 
         .total-queries {
           border-bottom: 2px solid #e9e9e9;
@@ -148,12 +136,34 @@
       }
 
       &.profiling {
-        transform: translateX(400%);
+        transform: translateX(100%);
 
         pre {
           white-space: pre;
         }
       }
+
+      &.objects{
+        transform: translateX(200%);
+
+        pre {
+          white-space: pre;
+        }
+      }
+
+      &.request {
+        transform: translateX(300%);
+      }
+
+      &.response {
+        transform: translateX(400%);
+      }
+
+      &.session {
+        transform: translateX(500%);
+      }
+
+
     }
   }
 
@@ -164,7 +174,7 @@
     position: absolute;
     top: @tab-height - 2;
     transition: 0.3s transform ease-in-out;
-    width: 25%;
+    width: 16%;
   }
 
   pre {
